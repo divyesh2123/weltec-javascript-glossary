@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="item" />
+
+    <button onclick="saveInfo()">Save</button>
+
+    <div id="display"></div>
+    <script>
+
+        let myarray= [];
+
+        let index =-1;
+        function saveInfo()
+        {
+
+            let myitem = document.getElementById("item").value;
+
+            if(index == -1)
+            {
+            myarray.push(myitem);
+            }
+            else
+            {
+                myarray[index] = myitem;
+            }
+
+            index =-1;
+            displayInfo();
+
+        }
+
+        function displayInfo()
+        {
+            let p = myarray.map((p,index)=>{
+
+                return `<li>${p}
+                    
+                        <button onclick="removeInfo(${index})">delete</button>
+                    
+                        <button onclick="editInfo(${index})">edit</button>
+                    </li>
+                
+                `
+
+
+            })
+
+
+            document.getElementById("display").innerHTML = p.join(" ");
+        }
+
+
+        function removeInfo(index)
+        {
+            myarray.splice(index,1);
+
+            displayInfo();
+
+        }
+
+        function editInfo(d)
+        {
+           
+            document.getElementById("item").value = myarray[d];
+       
+            index = d;
+        }
+
+
+
+    </script>
+</body>
+</html>
